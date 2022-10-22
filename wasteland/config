@@ -1,0 +1,4 @@
+# html-renderer and pager
+html-renderer "cat"
+pager "/root/git/img_pager/render.py %f && /root/git/img_pager/viewer.py"
+browser "/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
