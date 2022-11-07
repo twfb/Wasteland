@@ -4,8 +4,9 @@
 
 # INSTALL
 1. install [tiv](https://github.com/stefanhaustein/TerminalImageViewer) and [newsboat](https://newsboat.org/)
-2. `cp -r wasteland ~/.newsboat/wasteland`
-3. config newsboat `vim ~/.newsboat/config`
+2. `pip3 install -r requirements.txt`
+3. `cp -r wasteland ~/.newsboat/wasteland`
+4. config newsboat `vim ~/.newsboat/config`
 ```
 html-renderer "cat"
 pager "~/.newsboat/wasteland/render.py %f && ~/.newsboat/wasteland/viewer.py"

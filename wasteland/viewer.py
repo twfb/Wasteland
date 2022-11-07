@@ -1,15 +1,13 @@
 #!/bin/env python3
 import sys
 import os
-import requests
 import re
 import hashlib
 import json
-import time
 import shutil
 import getch
 from render import main as render
-from pyzbar.pyzbar import decode, ZBarSymbol
+from pyzbar.pyzbar import decode
 from pyparsing import *
 
 ANSI_RESET = "\u001b[0m"
