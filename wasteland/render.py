@@ -69,7 +69,6 @@ previous_row_count = 0
 host = ""
 
 
-
 def get_colorful_str(s, color="", fun=str, ender=""):
     c = color.split("__")
     lc = len(c)
@@ -350,6 +349,7 @@ def generate():
 
 
 def parse_markdown(content):
+    content = re.sub("Link: (https?://.+)\n", r"Link: [\1](\1)\n", content, count=1)
     columns = shutil.get_terminal_size().columns
     result = []
     page_urls = []
@@ -382,16 +382,15 @@ def parse_markdown(content):
             l = l.replace(
                 italic_search.group(0), get_colorful_str(name, "italic_white")
             )
-
         while img.search(l):
             img_search = img.search(l)
             name, url = img_search.groups()
             name = name.strip()
             string = "{} (image)".format(url)
             if string in page_urls:
-                index = page_urls.index(string) + 1
+                index = page_urls.index(string)
             else:
-                index = len(page_urls) + 1
+                index = len(page_urls)
                 page_urls.append(string)
 
             if name:
@@ -405,9 +404,9 @@ def parse_markdown(content):
             url = link_search.group(1)
             string = "{} (qrcode)".format(url)
             if string in page_urls:
-                index = page_urls.index(string) + 1
+                index = page_urls.index(string)
             else:
-                index = len(page_urls) + 1
+                index = len(page_urls)
                 page_urls.append(string)
             l = l.replace(
                 link_search.group(0),
@@ -419,9 +418,9 @@ def parse_markdown(content):
             name = name.strip()
             string = "{} (link)".format(url)
             if string in page_urls:
-                index = page_urls.index(string) + 1
+                index = page_urls.index(string)
             else:
-                index = len(page_urls) + 1
+                index = len(page_urls)
                 page_urls.append(string)
             l = l.replace(
                 link_search.group(0),
@@ -431,7 +430,7 @@ def parse_markdown(content):
     result.append("")
     for i, v in enumerate(page_urls):
         v = get_url(v, host)
-        v = "[{}]: {}".format(i + 1, v)
+        v = "[{}]: {}".format(i, v)
         result.append(get_colorful_str(v, "cyan"))
 
     return "\n".join(result)

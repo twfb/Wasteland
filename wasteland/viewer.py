@@ -371,7 +371,8 @@ def watch():
         elif key == "g":
             up(lines_length)
         else:
-            print([key])
+            pass
+            # print([key])
 
 
 if __name__ == "__main__":
