@@ -275,11 +275,13 @@ def generate():
     global host
     columns = shutil.get_terminal_size().columns
     column_ender = "." + str(columns // 10)
-    html = improve_html(open(raw_path).read())
-    host = re.search("Link: (https://[^/ ]*)", html).group(1)
-    html = markdownify.markdownify(
-        html, heading_style="ATX", wrap=True, wrap_width=columns
-    )
+    html = open(raw_path).read()
+    if "<" in html:
+        html = improve_html(html)
+        host = re.search("Link: (https?://[^/ ]*)", html).group(1)
+        html = markdownify.markdownify(
+            html, heading_style="ATX", wrap=True, wrap_width=columns
+        )
     open(raw_path, "w").write(html)
     html_url = re.search("Link: (https?://.*?)\n", html).group(1)
     read_file_path = (

@@ -10,6 +10,7 @@ from render import main as render
 from pyzbar.pyzbar import decode
 from pyparsing import *
 
+
 ANSI_RESET = "\u001b[0m"
 ANSI_CURSOR_UP = "\u001b[A"
 
